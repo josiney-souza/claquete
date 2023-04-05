@@ -23,6 +23,34 @@
 DIR_FONTES_TEX="fontes-tex"
 DIR_CERTIFICADOS_PDF="certificados-pdf"
 
+# Bases de dados dos tipos/categorias de participantes do evento
+DADOS_INSCRICOES="dados-inscricoes.csv"
+DADOS_OUVINTES="dados-ouvintes.csv"
+
+
+
+########################################
+##### FUNCAO: cria_base_ouvintes() #####
+########################################
+function cria_base_ouvintes () {
+    echo -n "Criando base de dados de ouvintes a partir das inscricoes... "
+
+    rm -f ${DADOS_OUVINTES}
+    cat ${DADOS_INSCRICOES} | while read PARTICIPANTE
+    do
+        EMAIL=$(echo $PARTICIPANTE | cut -d';' -f2)
+        NOME=$(echo $PARTICIPANTE | cut -d';' -f3)
+        CPF=$(echo $PARTICIPANTE | cut -d';' -f4)
+
+    echo "${NOME};${CPF};ouvinte;24;${EMAIL}" >> ${DADOS_OUVINTES}
+    done
+
+    sleep 1s
+    echo "OK."
+}
+
+
+
 ############################
 ##### FUNCAO PRINCIPAL #####
 ############################
@@ -52,6 +80,10 @@ else
     cd ${DIR_CERTIFICADOS_PDF} && rm -f ./* && cd - &> /dev/null
 
     # A partir daqui, se inicia uma nova execucao do sistema
+
+    # Cria a base de dados de ouvintes a partir da lista de inscritos obtida
+    # do formulario disponivel na Internet
+    cria_base_ouvintes
 fi
 
 exit 0
