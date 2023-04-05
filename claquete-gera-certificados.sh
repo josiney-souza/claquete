@@ -26,6 +26,12 @@ DIR_CERTIFICADOS_PDF="certificados-pdf"
 # Bases de dados dos tipos/categorias de participantes do evento
 DADOS_INSCRICOES="dados-inscricoes.csv"
 DADOS_OUVINTES="dados-ouvintes.csv"
+DADOS_PALESTRANTES="dados-palestrantes.csv"
+DADOS_MEDIADORES="dados-mediadores.csv"
+DADOS_ORGANIZACAO="dados-organizacao.csv"
+
+# Base de dados unica que junta todas as demais bases
+DADOS="dados.txt"
 
 
 
@@ -43,6 +49,34 @@ function cria_base_ouvintes () {
         CPF=$(echo $PARTICIPANTE | cut -d';' -f4)
 
     echo "${NOME};${CPF};ouvinte;24;${EMAIL}" >> ${DADOS_OUVINTES}
+    done
+
+    sleep 1s
+    echo "OK."
+}
+
+
+
+#########################################
+##### FUNCAO: cria_base_formatada() #####
+#########################################
+function cria_base_formatada () {
+    echo -n "Criando base de dados formatada para o script... "
+
+    rm -f ${DADOS}
+    for BASE_USADA in ${DADOS_OUVINTES} ${DADOS_PALESTRANTES} \
+        ${DADOS_MEDIADORES} ${DADOS_ORGANIZACAO}
+    do
+            cat ${BASE_USADA} | while read PARTICIPANTE
+            do
+                NOME=$(echo $PARTICIPANTE | cut -d';' -f1)
+                CPF=$(echo $PARTICIPANTE | cut -d';' -f2)
+                TIPO=$(echo $PARTICIPANTE | cut -d';' -f3)
+                HORAS=$(echo $PARTICIPANTE | cut -d';' -f4)
+                ADICIONAL=$(echo $PARTICIPANTE | cut -d';' -f6)
+
+            echo "${NOME};${CPF};${TIPO};${HORAS};${ADICIONAL}" >> ${DADOS}
+            done
     done
 
     sleep 1s
@@ -84,6 +118,9 @@ else
     # Cria a base de dados de ouvintes a partir da lista de inscritos obtida
     # do formulario disponivel na Internet
     cria_base_ouvintes
+
+    # Cria uma base de dados unica juntando todas as demais bases de dados
+    cria_base_formatada
 fi
 
 exit 0
