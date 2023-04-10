@@ -1,0 +1,45 @@
+\documentclass{abnt}
+\usepackage[a4paper,top=5cm,bottom=2cm,right=4cm,left=2cm,landscape]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{color}
+
+\usepackage{multirow}
+
+\usepackage[pages=some]{background}
+\backgroundsetup{
+scale=1,
+color=white,
+opacity=0.15,
+angle=0,
+contents={%
+\includegraphics[width=\paperwidth,height=\paperheight]{../imagem-fundo.jpg}}
+}
+
+\begin{document}
+\BgThispage
+\color{CONF_COR}
+\bf
+\begin{center}
+    \Huge{CERTIFICADO}
+\end{center}
+
+Certificamos que NOMEP, CPF CPFP, participou da EVENTOP, no período de
+PERIODOP como TIPOP, atuando nas atividades de ATIVIDADESP e perfazendo a
+carga horária de HORASP hora(s).
+
+\raggedleft{Brusque, DATAP}
+
+\begin{center}
+\includegraphics[scale=0.2]{../assinatura-pb.png}\\
+Josiney de Souza\\
+Coordenador do Curso Técnico em Informática - Portaria Nº 025/2017\\
+Presidente da Comissão Organizadora da EVENTOP - Portaria Nº 170/2017
+\end{center}
+
+\newpage
+\newgeometry{top=1cm,bottom=1cm,left=1cm,right=1cm}
+\centering{Programação / Grade de Atividades:}
+
+\includegraphics[scale=0.85]{../juncao-grades.png}
+\end{document}
