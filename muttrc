@@ -1,0 +1,18 @@
+set realname = "SEU_NOME_VAI_AQUI"
+set from = "SEU_EMAIL@DOMINIO"
+set use_from = yes
+set envelope_from = yes
+
+set smtp_url = "smtps://SEU_EMAIL@DOMINIO@smtp.gmail.com:465/"
+set smtp_pass = "SENHA_VAI_AQUI"
+#set imap_user = "<gmail username>@gmail.com"
+#set imap_pass = "<gmail password>"
+#set folder = "imaps://imap.gmail.com:993"
+#set spoolfile = "+INBOX"
+set ssl_force_tls = yes
+
+# G to get mail
+#bind index G imap-fetch-mail
+set editor = "vi"
+set charset = "utf-8"
+set record = ''
