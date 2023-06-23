@@ -26,6 +26,7 @@ DIR_CERTIFICADOS_PDF="certificados-pdf"
 # Diretorio/pasta das imagens usadas no certificado
 DIR_IMAGENS="imagens"
 
+# Diretorio/pasta das bases de dados usadas no sistema Claquete
 DIR_DADOS="dados"
 
 # Bases de dados dos tipos/categorias de participantes do evento
@@ -183,7 +184,7 @@ NOME_ARQUIVO="certificado-${NOME_COM_UNDERLINE}-${TIPO}-${NUM_CERTIFICADO}"
             -e "s/EVENTOP/${EVENTO}/g" -e "s/PERIODOP/${PERIODO}/g" \
             -e "s/DATAP/${DATA}/g" ${NOME_ARQUIVO}.tex
 
-        # Defini a cor do texto dos certificados com base na configuracao
+        # Define a cor do texto dos certificados com base na configuracao
         # definida no comeco do script
         sed -i -e "s/CONF_COR/${CONF_COR}/g" ${NOME_ARQUIVO}.tex
 
