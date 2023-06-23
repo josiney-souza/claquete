@@ -23,6 +23,9 @@
 DIR_FONTES_TEX="fontes-tex"
 DIR_CERTIFICADOS_PDF="certificados-pdf"
 
+# Diretorio/pasta das imagens usadas no certificado
+DIR_IMAGENS="imagens"
+
 # Bases de dados dos tipos/categorias de participantes do evento
 DADOS_INSCRICOES="dados-inscricoes.csv"
 DADOS_OUVINTES="dados-ouvintes.csv"
@@ -38,6 +41,11 @@ BASE_OUVINTE="base-ouvinte.tex"
 BASE_PALESTRANTE="base-palestrante.tex"
 BASE_MEDIADOR="base-mediador.tex"
 BASE_ORGANIZACAO="base-organizacao.tex"
+
+# Indicacao dos arquivos de imagens usados nos certificados
+FUNDO="${DIR_IMAGENS}/imagem-fundo.jpg"
+ASSINATURA="${DIR_IMAGENS}/assinatura-pb.png"
+GRADE="${DIR_IMAGENS}/juncao-grades.png"
 
 # Cor do texto no certificado
 CONF_COR="black"
@@ -176,6 +184,12 @@ NOME_ARQUIVO="certificado-${NOME_COM_UNDERLINE}-${TIPO}-${NUM_CERTIFICADO}"
         # Defini a cor do texto dos certificados com base na configuracao
         # definida no comeco do script
         sed -i -e "s/CONF_COR/${CONF_COR}/g" ${NOME_ARQUIVO}.tex
+
+        # Altera os tokens das imagens pelo valor das variaveis globais
+        # OBS.: eh importante que o separador do sed(1) aqui seja qualquer
+        #   um que nao a barra, pois ela eh usada nos caminhos das imagens
+        sed -i -e "s#FUNDOP#${FUNDO}#g" -e "s#ASSINATURAP#${ASSINATURA}#g" \
+            -e "s#GRADEP#${GRADE}#g" ${NOME_ARQUIVO}.tex
 
         # Realoca o arquivo-fonte LaTeX gerado para a pasta mais adequada
         mv ${NOME_ARQUIVO}.tex ${DIR_FONTES_TEX}
