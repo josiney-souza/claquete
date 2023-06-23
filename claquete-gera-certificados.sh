@@ -39,11 +39,14 @@ DADOS_ORGANIZACAO="${DIR_DADOS}/dados-organizacao.csv"
 # Base de dados unica que junta todas as demais bases
 DADOS="${DIR_DADOS}/dados.txt"
 
+# Diretorio/pasta dos modelos/templates de certificados de cada categoria
+DIR_MODELOS="modelos"
+
 # Bases de certificados em LaTeX para cada categoria que sera gerada
-BASE_OUVINTE="base-ouvinte.tex"
-BASE_PALESTRANTE="base-palestrante.tex"
-BASE_MEDIADOR="base-mediador.tex"
-BASE_ORGANIZACAO="base-organizacao.tex"
+BASE_OUVINTE="${DIR_MODELOS}/base-ouvinte.tex"
+BASE_PALESTRANTE="${DIR_MODELOS}/base-palestrante.tex"
+BASE_MEDIADOR="${DIR_MODELOS}/base-mediador.tex"
+BASE_ORGANIZACAO="${DIR_MODELOS}/base-organizacao.tex"
 
 # Indicacao dos arquivos de imagens usados nos certificados
 FUNDO="${DIR_IMAGENS}/imagem-fundo.jpg"
