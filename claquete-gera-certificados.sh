@@ -26,15 +26,17 @@ DIR_CERTIFICADOS_PDF="certificados-pdf"
 # Diretorio/pasta das imagens usadas no certificado
 DIR_IMAGENS="imagens"
 
+DIR_DADOS="dados"
+
 # Bases de dados dos tipos/categorias de participantes do evento
-DADOS_INSCRICOES="dados-inscricoes.csv"
-DADOS_OUVINTES="dados-ouvintes.csv"
-DADOS_PALESTRANTES="dados-palestrantes.csv"
-DADOS_MEDIADORES="dados-mediadores.csv"
-DADOS_ORGANIZACAO="dados-organizacao.csv"
+DADOS_INSCRICOES="${DIR_DADOS}/dados-inscricoes.csv"
+DADOS_OUVINTES="${DIR_DADOS}/dados-ouvintes.csv"
+DADOS_PALESTRANTES="${DIR_DADOS}/dados-palestrantes.csv"
+DADOS_MEDIADORES="${DIR_DADOS}/dados-mediadores.csv"
+DADOS_ORGANIZACAO="${DIR_DADOS}/dados-organizacao.csv"
 
 # Base de dados unica que junta todas as demais bases
-DADOS="dados.txt"
+DADOS="${DIR_DADOS}/dados.txt"
 
 # Bases de certificados em LaTeX para cada categoria que sera gerada
 BASE_OUVINTE="base-ouvinte.tex"
