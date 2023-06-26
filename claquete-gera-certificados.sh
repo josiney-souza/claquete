@@ -23,34 +23,6 @@ source variaveis.txt
 
 
 
-#########################################
-##### FUNCAO: cria_base_formatada() #####
-#########################################
-function cria_base_formatada () {
-    echo -n "Criando base de dados formatada para o script... "
-
-    rm -f ${DADOS}
-    for BASE_USADA in ${DADOS_OUVINTES} ${DADOS_PALESTRANTES} \
-        ${DADOS_MEDIADORES} ${DADOS_ORGANIZACAO}
-    do
-            cat ${BASE_USADA} | while read PARTICIPANTE
-            do
-                NOME=$(echo $PARTICIPANTE | cut -d';' -f1)
-                CPF=$(echo $PARTICIPANTE | cut -d';' -f2)
-                TIPO=$(echo $PARTICIPANTE | cut -d';' -f3)
-                HORAS=$(echo $PARTICIPANTE | cut -d';' -f4)
-                ADICIONAL=$(echo $PARTICIPANTE | cut -d';' -f6)
-
-            echo "${NOME};${CPF};${TIPO};${HORAS};${ADICIONAL}" >> ${DADOS}
-            done
-    done
-
-    sleep 1s
-    echo "OK."
-}
-
-
-
 #####################################
 ##### FUNCAO: cria_fontes_tex() #####
 #####################################
@@ -215,7 +187,7 @@ else
     ./claquete-cria-base-ouvintes.sh
 
     # Cria uma base de dados unica juntando todas as demais bases de dados
-    cria_base_formatada
+    ./claquete-cria-base-formatada.sh
 
     # Cria os arquivos-fonte em LaTeX como passo intermediario antes de gerar
     # os arquivos PDF
