@@ -174,6 +174,15 @@ then
         cd ${DIR_FONTES_TEX} && rm -f ./* && cd - &> /dev/null
         cd ${DIR_CERTIFICADOS_PDF} && rm -f ./* && cd - &> /dev/null
     fi
+elif [[ $1 == "ouvintes" ]]
+then
+    # Cria a base de dados de ouvintes a partir da lista de inscritos obtida
+    # do formulario disponivel na Internet
+    ./claquete-cria-base-ouvintes.sh
+elif [[ $1 == "formatada" ]]
+then
+    # Cria uma base de dados unica juntando todas as demais bases de dados
+    ./claquete-cria-base-formatada.sh
 else
     # Antes de se criar qualquer novo arquivo, apaga qualquer arquivo
     # remanescente da execucao anterior (fontes LaTeX e PDFs)
@@ -181,13 +190,6 @@ else
     cd ${DIR_CERTIFICADOS_PDF} && rm -f ./* && cd - &> /dev/null
 
     # A partir daqui, se inicia uma nova execucao do sistema
-
-    # Cria a base de dados de ouvintes a partir da lista de inscritos obtida
-    # do formulario disponivel na Internet
-    ./claquete-cria-base-ouvintes.sh
-
-    # Cria uma base de dados unica juntando todas as demais bases de dados
-    ./claquete-cria-base-formatada.sh
 
     # Cria os arquivos-fonte em LaTeX como passo intermediario antes de gerar
     # os arquivos PDF
