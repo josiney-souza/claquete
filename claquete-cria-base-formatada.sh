@@ -29,22 +29,20 @@ rm -f ${DADOS}
 for BASE_USADA in ${DADOS_OUVINTES} ${DADOS_PALESTRANTES} \
     ${DADOS_MEDIADORES} ${DADOS_ORGANIZACAO}
 do
-        cat ${BASE_USADA} | while read PARTICIPANTE
-        do
-            NOME=$(echo $PARTICIPANTE | cut -d';' -f1)
-            CPF=$(echo $PARTICIPANTE | cut -d';' -f2)
-            TIPO=$(echo $PARTICIPANTE | cut -d';' -f3)
-            HORAS=$(echo $PARTICIPANTE | cut -d';' -f4)
-            EMAIL=$(echo $PARTICIPANTE | cut -d';' -f5)
-            ADICIONAL=$(echo $PARTICIPANTE | cut -d';' -f6)
+    cat ${BASE_USADA} | while read PARTICIPANTE
+    do
+        NOME=$(echo $PARTICIPANTE | cut -d';' -f1)
+        CPF=$(echo $PARTICIPANTE | cut -d';' -f2)
+        TIPO=$(echo $PARTICIPANTE | cut -d';' -f3)
+        HORAS=$(echo $PARTICIPANTE | cut -d';' -f4)
+        EMAIL=$(echo $PARTICIPANTE | cut -d';' -f5)
+        ADICIONAL=$(echo $PARTICIPANTE | cut -d';' -f6)
 
-        echo "${NOME};${CPF};${TIPO};${HORAS};${EMAIL};${ADICIONAL}" >> ${DADOS}
-        done
+    echo "${NOME};${CPF};${TIPO};${HORAS};${EMAIL};${ADICIONAL}" >> ${DADOS}
+    done
 done
 
 sleep 1s
 echo "OK."
-
-
 
 exit 0
