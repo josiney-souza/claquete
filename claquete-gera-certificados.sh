@@ -23,28 +23,6 @@ source variaveis.txt
 
 
 
-########################################
-##### FUNCAO: cria_base_ouvintes() #####
-########################################
-function cria_base_ouvintes () {
-    echo -n "Criando base de dados de ouvintes a partir das inscricoes... "
-
-    rm -f ${DADOS_OUVINTES}
-    cat ${DADOS_INSCRICOES} | while read PARTICIPANTE
-    do
-        EMAIL=$(echo $PARTICIPANTE | cut -d';' -f2)
-        NOME=$(echo $PARTICIPANTE | cut -d';' -f3)
-        CPF=$(echo $PARTICIPANTE | cut -d';' -f4)
-
-    echo "${NOME};${CPF};ouvinte;24;${EMAIL}" >> ${DADOS_OUVINTES}
-    done
-
-    sleep 1s
-    echo "OK."
-}
-
-
-
 #########################################
 ##### FUNCAO: cria_base_formatada() #####
 #########################################
@@ -234,7 +212,7 @@ else
 
     # Cria a base de dados de ouvintes a partir da lista de inscritos obtida
     # do formulario disponivel na Internet
-    cria_base_ouvintes
+    ./claquete-cria-base-ouvintes.sh
 
     # Cria uma base de dados unica juntando todas as demais bases de dados
     cria_base_formatada
