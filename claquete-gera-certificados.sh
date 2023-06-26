@@ -43,6 +43,7 @@ DADOS="${DIR_DADOS}/dados.txt"
 DIR_MODELOS="modelos"
 
 # Bases de certificados em LaTeX para cada categoria que sera gerada
+BASE_GERAL="base-geral.tex"
 BASE_OUVINTE="${DIR_MODELOS}/base-ouvinte.tex"
 BASE_PALESTRANTE="${DIR_MODELOS}/base-palestrante.tex"
 BASE_MEDIADOR="${DIR_MODELOS}/base-mediador.tex"
@@ -161,19 +162,27 @@ NOME_ARQUIVO="certificado-${NOME_COM_UNDERLINE}-${TIPO}-${NUM_CERTIFICADO}"
         # categoria de participacao
         if [[ ${TIPO} == "ouvinte" ]]
         then
-            cp ${BASE_OUVINTE} ${NOME_ARQUIVO}.tex
+            cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
+            CONTEUDO=$(cat ${BASE_OUVINTE})
+            sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
         elif [[ ${TIPO} == "palestrante" ]]
         then
-            cp ${BASE_PALESTRANTE} ${NOME_ARQUIVO}.tex
+            cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
+            CONTEUDO=$(cat ${BASE_PALESTRANTE})
+            sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
             sed -i -e "s/TITULOP/${ADICIONAL}/g" ${NOME_ARQUIVO}.tex
         elif [[ ${TIPO} == "mediador" ]]
         then
-            cp ${BASE_MEDIADOR} ${NOME_ARQUIVO}.tex
+            cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
+            CONTEUDO=$(cat ${BASE_MEDIADOR})
+            sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
             sed -i -e "s/ASSUNTOP/${ADICIONAL}/g" ${NOME_ARQUIVO}.tex
         elif [[ ${TIPO} == "organizacao" ]]
         then
             TIPO="membro da Comissão de Organização"
-            cp ${BASE_ORGANIZACAO} ${NOME_ARQUIVO}.tex
+            cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
+            CONTEUDO=$(cat ${BASE_ORGANIZACAO})
+            sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
             sed -i -e "s/ATIVIDADESP/organizador/g" ${NOME_ARQUIVO}.tex
         else
             echo "ERRO: tipo de participante nao existe"
