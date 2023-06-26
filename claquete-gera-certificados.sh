@@ -19,49 +19,7 @@
 ##### Variaveis globais e de configuracao #####
 ###############################################
 
-# Diretorios/pastas de destino dos arquivos gerados na execucao do sistema
-DIR_FONTES_TEX="fontes-tex"
-DIR_CERTIFICADOS_PDF="certificados-pdf"
-
-# Diretorio/pasta das imagens usadas no certificado
-DIR_IMAGENS="imagens"
-
-# Diretorio/pasta das bases de dados usadas no sistema Claquete
-DIR_DADOS="dados"
-
-# Bases de dados dos tipos/categorias de participantes do evento
-DADOS_INSCRICOES="${DIR_DADOS}/dados-inscricoes.csv"
-DADOS_OUVINTES="${DIR_DADOS}/dados-ouvintes.csv"
-DADOS_PALESTRANTES="${DIR_DADOS}/dados-palestrantes.csv"
-DADOS_MEDIADORES="${DIR_DADOS}/dados-mediadores.csv"
-DADOS_ORGANIZACAO="${DIR_DADOS}/dados-organizacao.csv"
-
-# Base de dados unica que junta todas as demais bases
-DADOS="${DIR_DADOS}/dados.txt"
-
-# Diretorio/pasta dos modelos/templates de certificados de cada categoria
-DIR_MODELOS="modelos"
-
-# Bases de certificados em LaTeX para cada categoria que sera gerada
-BASE_GERAL="base-geral.tex"
-BASE_OUVINTE="${DIR_MODELOS}/base-ouvinte.tex"
-BASE_PALESTRANTE="${DIR_MODELOS}/base-palestrante.tex"
-BASE_MEDIADOR="${DIR_MODELOS}/base-mediador.tex"
-BASE_ORGANIZACAO="${DIR_MODELOS}/base-organizacao.tex"
-
-# Indicacao dos arquivos de imagens usados nos certificados
-FUNDO="${DIR_IMAGENS}/imagem-fundo.jpg"
-ASSINATURA="${DIR_IMAGENS}/assinatura-pb.png"
-GRADE="${DIR_IMAGENS}/juncao-grades.png"
-
-# Cor do texto no certificado
-CONF_COR="black"
-
-# Dados gerais do evento
-EVENTO="III Semana Acadêmica de Informática do Instituto Federal \
-Catarinense - Campus Brusque"
-PERIODO="25\/10\/2017 a 27\/10\/2017"
-DATA=$(date +"%d de %B de %Y")
+source variaveis.txt
 
 
 
