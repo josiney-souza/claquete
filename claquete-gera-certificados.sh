@@ -31,11 +31,26 @@ function cria_fontes_tex () {
 
     cat ${DADOS} | while read PARTICIPANTE
     do
-        NOME=$(echo $PARTICIPANTE | cut -d';' -f1)
-        CPF=$(echo $PARTICIPANTE | cut -d';' -f2)
-        TIPO=$(echo $PARTICIPANTE | cut -d';' -f3)
-        HORAS=$(echo $PARTICIPANTE | cut -d';' -f4)
-        ADICIONAL=$(echo $PARTICIPANTE | cut -d';' -f5)
+        # Para cada linha no arquivo ${CAMPO_TOKENS}, obtem os campos:
+        # 1 - nome da variável a se usar neste script
+        # 2 - campo correspondente na base de dados formatada e unica
+        # 3 - token nos arquivos TEX relacionado aos dois primeiros campos
+        #
+        # Entao prepara a string da linha que deve ser executada, sendo
+        # executada de fato a partir do comando eval (embutido do BASH)
+        #
+        # O controle do loop esta sobre a quantidade de linhas do arquivo
+        QTDE_TOKENS=$(wc -l ${CAMPOS_TOKENS} | awk '{print $1}')
+        for NUM_LINHA in $(seq 1 ${QTDE_TOKENS})
+        do
+            LINHA=$(sed -n ${NUM_LINHA}p ${CAMPOS_TOKENS})
+            VARIAVEL=$(echo ${LINHA} | cut -d";" -f1)
+            CAMPO=$(echo ${LINHA} | cut -d";" -f2)
+            TOKEN=$(echo ${LINHA} | cut -d";" -f3)
+            EXECUTAR="${VARIAVEL}=\"$(echo ${PARTICIPANTE} | cut -d';' \
+                -f${CAMPO})\""
+            eval ${EXECUTAR}
+        done
 
         # Obtem o nome do participante e substitui os espacos em branco por
         # sublinhados/underline/underscore
