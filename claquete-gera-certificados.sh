@@ -83,31 +83,25 @@ NOME_ARQUIVO="certificado-${NOME_COM_UNDERLINE}-${TIPO}-${NUM_CERTIFICADO}"
 
         # Escolhe a base do certificado em LaTeX correta a depender do tipo/
         # categoria de participacao
+        cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
         if [[ ${TIPO} == "ouvinte" ]]
         then
-            cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
             CONTEUDO=$(cat ${BASE_OUVINTE})
-            sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
         elif [[ ${TIPO} == "palestrante" ]]
         then
-            cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
             CONTEUDO=$(cat ${BASE_PALESTRANTE})
-            sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
         elif [[ ${TIPO} == "mediador" ]]
         then
-            cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
             CONTEUDO=$(cat ${BASE_MEDIADOR})
-            sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
         elif [[ ${TIPO} == "organizacao" ]]
         then
             TIPO="membro da Comissão de Organização"
-            cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
             CONTEUDO=$(cat ${BASE_ORGANIZACAO})
-            sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
         else
             echo "ERRO: tipo de participante nao existe"
             exit 1
         fi
+        sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
 
         # Substitui as informacoes das bases de dados no arquivo fonte .TEX
         #
