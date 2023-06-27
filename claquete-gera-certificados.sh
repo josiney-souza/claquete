@@ -93,30 +93,49 @@ NOME_ARQUIVO="certificado-${NOME_COM_UNDERLINE}-${TIPO}-${NUM_CERTIFICADO}"
             cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
             CONTEUDO=$(cat ${BASE_PALESTRANTE})
             sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
-            sed -i -e "s/TITULOP/${ADICIONAL}/g" ${NOME_ARQUIVO}.tex
         elif [[ ${TIPO} == "mediador" ]]
         then
             cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
             CONTEUDO=$(cat ${BASE_MEDIADOR})
             sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
-            sed -i -e "s/ASSUNTOP/${ADICIONAL}/g" ${NOME_ARQUIVO}.tex
         elif [[ ${TIPO} == "organizacao" ]]
         then
             TIPO="membro da Comissão de Organização"
             cp ${BASE_GERAL} ${NOME_ARQUIVO}.tex
             CONTEUDO=$(cat ${BASE_ORGANIZACAO})
             sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
-            sed -i -e "s/ATIVIDADESP/organizador/g" ${NOME_ARQUIVO}.tex
         else
             echo "ERRO: tipo de participante nao existe"
             exit 1
         fi
 
-        # Substitui as informacoes das bases de dados nos arquivos de base do
-        # certificado em LaTeX escolhido logo acima
-        sed -i -e "s/NOMEP/${NOME}/g" -e "s/CPFP/${CPF}/g" \
-            -e "s/TIPOP/${TIPO}/g" -e "s/HORASP/${HORAS}/g" \
-            -e "s/EVENTOP/${EVENTO}/g" -e "s/PERIODOP/${PERIODO}/g" \
+        # Substitui as informacoes das bases de dados no arquivo fonte .TEX
+        #
+        # Para cada linha no arquivo ${CAMPO_TOKENS}, obtem os campos:
+        # 1 - nome da variável a se usar neste script
+        # 2 - campo correspondente na base de dados formatada e unica
+        # 3 - token nos arquivos TEX relacionado aos dois primeiros campos
+        #
+        # Entao prepara a string da linha que deve ser executada, sendo
+        # executada de fato a partir do comando eval (embutido do BASH)
+        #
+        # O controle do loop esta sobre a quantidade de linhas do arquivo
+        QTDE_TOKENS=$(wc -l ${CAMPOS_TOKENS} | awk '{print $1}')
+        for NUM_LINHA in $(seq 1 ${QTDE_TOKENS})
+        do
+            LINHA=$(sed -n ${NUM_LINHA}p ${CAMPOS_TOKENS})
+            VARIAVEL=$(echo ${LINHA} | cut -d";" -f1)
+            AUX1="\$${VARIAVEL}"
+            VARIAVEL=$(eval "echo $AUX1")
+            CAMPO=$(echo ${LINHA} | cut -d";" -f2)
+            TOKEN=$(echo ${LINHA} | cut -d";" -f3)
+            EXECUTAR="sed -i -e \"s#${TOKEN}#${VARIAVEL}#g\" ${NOME_ARQUIVO}.tex"
+            eval ${EXECUTAR}
+        done
+
+        # Substitui informacoes gerais e comuns a todos os certificados,
+        # como nome do evento, periodo de realizacao e data da emissao
+        sed -i -e "s/EVENTOP/${EVENTO}/g" -e "s/PERIODOP/${PERIODO}/g" \
             -e "s/DATAP/${DATA}/g" ${NOME_ARQUIVO}.tex
 
         # Define a cor do texto dos certificados com base na configuracao
