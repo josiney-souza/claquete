@@ -35,7 +35,7 @@ DADOS_MEDIADORES="${DIR_DADOS}/dados-mediadores.csv"
 DADOS_ORGANIZACAO="${DIR_DADOS}/dados-organizacao.csv"
 
 # Base de dados unica que junta todas as demais bases
-DADOS="${DIR_DADOS}/dados.txt"
+DADOS="${DIR_DADOS}/dados.csv"
 
 # Diretorio/pasta dos modelos/templates de certificados de cada categoria
 DIR_MODELOS="modelos"
