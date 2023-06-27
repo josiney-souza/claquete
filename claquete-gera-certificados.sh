@@ -54,7 +54,7 @@ function cria_fontes_tex () {
 
         # Obtem o nome do participante e substitui os espacos em branco por
         # sublinhados/underline/underscore
-        NOME_COM_UNDERLINE=$(echo $NOME | sed -e "s/ /_/g")
+        NOME_COM_UNDERLINE=$(echo $NOME | sed -e "s# #_#g")
 
         # Define que o nome do arquivo sera certificado-NOME-TIPO, onde
         # NOME: nome da pessoa que recebera o certificado
@@ -101,7 +101,7 @@ NOME_ARQUIVO="certificado-${NOME_COM_UNDERLINE}-${TIPO}-${NUM_CERTIFICADO}"
             echo "ERRO: tipo de participante nao existe"
             exit 1
         fi
-        sed -i -e "s/TEXTOCATEGORIAP/${CONTEUDO}/g" ${NOME_ARQUIVO}.tex
+        sed -i -e "s#TEXTOCATEGORIAP#${CONTEUDO}#g" ${NOME_ARQUIVO}.tex
 
         # Substitui as informacoes das bases de dados no arquivo fonte .TEX
         #
@@ -129,12 +129,12 @@ NOME_ARQUIVO="certificado-${NOME_COM_UNDERLINE}-${TIPO}-${NUM_CERTIFICADO}"
 
         # Substitui informacoes gerais e comuns a todos os certificados,
         # como nome do evento, periodo de realizacao e data da emissao
-        sed -i -e "s/EVENTOP/${EVENTO}/g" -e "s/PERIODOP/${PERIODO}/g" \
-            -e "s/DATAP/${DATA}/g" ${NOME_ARQUIVO}.tex
+        sed -i -e "s#EVENTOP#${EVENTO}#g" -e "s#PERIODOP#${PERIODO}#g" \
+            -e "s#DATAP#${DATA}#g" ${NOME_ARQUIVO}.tex
 
         # Define a cor do texto dos certificados com base na configuracao
         # definida no comeco do script
-        sed -i -e "s/CONF_COR/${CONF_COR}/g" ${NOME_ARQUIVO}.tex
+        sed -i -e "s#CONF_COR#${CONF_COR}#g" ${NOME_ARQUIVO}.tex
 
         # Altera os tokens das imagens pelo valor das variaveis globais
         # OBS.: eh importante que o separador do sed(1) aqui seja qualquer
