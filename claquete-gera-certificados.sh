@@ -190,6 +190,17 @@ else
     cd ${DIR_CERTIFICADOS_PDF} && rm -f ./* && cd - &> /dev/null
 
     # A partir daqui, se inicia uma nova execucao do sistema
+    if [ ! -e ${DADOS} ]
+    then
+        echo "ERRO: Criar uma base de dados com os dados dos certificados"
+        echo -n "- Nome da base: "
+        basename ${DADOS}
+        echo -n "- Localização: "
+        dirname ${DADOS}
+        echo "- Campos necessários (arquivo ${CAMPOS_TOKENS}):"
+        cat ${CAMPOS_TOKENS}
+        exit 1
+    fi
 
     # Cria os arquivos-fonte em LaTeX como passo intermediario antes de gerar
     # os arquivos PDF
