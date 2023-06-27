@@ -62,5 +62,5 @@ CONF_COR="black"
 # Dados gerais do evento
 EVENTO="III Semana Acadêmica de Informática do Instituto Federal \
 Catarinense - Campus Brusque"
-PERIODO="25\/10\/2017 a 27\/10\/2017"
+PERIODO="25/10/2017 a 27/10/2017"
 DATA=$(date +"%d de %B de %Y")
